@@ -1,0 +1,27 @@
+server:
+  port: 8084
+
+# 配置连接池，spring内置的HikariCP
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///mybatis
+    username: root
+    password: 1234
+  application:
+    name: service-provider  # 将来会作为微服务的名称
+
+# 配置mybatis实体类包，扫描
+mybatis:
+  type-aliases-package: org.junhi.pojo
+
+# 测试中文是否会乱码
+# 配置eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    register-with-eureka: true  # 服务提供方启动时，会检测该参数是否为true，true-注册给eureka（默认为true）
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 心跳检测，默认30秒检测一次eureka注册方是否存活
+    lease-expiration-duration-in-seconds: 15 # 过期时间，默认90秒

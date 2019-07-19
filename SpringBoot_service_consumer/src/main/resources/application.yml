@@ -1,0 +1,27 @@
+server:
+  port: 8083
+
+# 配置别名
+spring:
+  application:
+    name: service-consumer
+
+# 配置eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    fetch-registry: true # 服务启动时检测参数是否为true，true-注册到eureka
+    registry-fetch-interval-seconds: 5 # 拉取注册的服务方列表，默认30秒，开发时可以调小，加快效率
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000  # 设置hystrix的超时时间为6秒
+
+feign:
+  hystrix:
+    enabled: true  # 开启feign的熔断，默认是关闭的
